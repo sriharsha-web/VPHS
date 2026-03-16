@@ -70,174 +70,165 @@ const Index = () => {
 
   return (
     <div className="bg-background text-foreground">
-      {/* Hero — Split Screen */}
-      <section ref={heroRef} className="relative bg-background overflow-hidden flex flex-col md:flex-row" style={{ minHeight: '100svh' }}>
+      {/* Hero — Clean & Compact */}
+      <section ref={heroRef} className="relative bg-background pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
+        {/* Background dot pattern */}
+        <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #7A0032 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
-        {/* Left text panel */}
-        <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-20 py-28 md:py-16">
-          {/* Subtle background dot grid */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #7A0032 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
-
-          <motion.div variants={stagger} initial="initial" animate="animate" className="relative">
-
-            <motion.h1
-              variants={fadeUp}
-              className="font-heading font-black leading-[0.95] tracking-tighter text-foreground mb-5"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
-            >
-              Shaping<br/>
-              <span className="text-primary">Tomorrow's</span><br/>
-              Leaders
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-muted-foreground font-body text-base md:text-lg mb-8 max-w-md leading-relaxed">
-              Two decades of nurturing curious minds. A community built on knowledge, values, and the belief that every child can shine.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-              <Link
-                to="/admissions"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-primary-foreground font-bold rounded-2xl hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1 group text-sm md:text-base"
-              >
-                Enrol Now <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-primary/20 text-foreground font-semibold rounded-2xl hover:border-primary hover:text-primary transition-all duration-300 text-sm md:text-base"
-              >
-                Learn More
-              </Link>
-            </motion.div>
-
-            {/* Inline stats strip */}
-            <motion.div variants={fadeUp} className="flex items-center gap-6 sm:gap-8 mt-10 pt-8 border-t border-primary/10">
-              {[{ n: '20+', l: 'Years' }, { n: '1500+', l: 'Students' }, { n: '95%', l: 'Pass Rate' }].map(s => (
-                <div key={s.l}>
-                  <p className="text-xl sm:text-2xl font-black text-primary">{s.n}</p>
-                  <p className="text-xs text-muted-foreground font-medium">{s.l}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Right image panel */}
-        <div className="relative w-full md:w-1/2 min-h-[50vw] md:min-h-0 overflow-hidden">
-          <div className="absolute inset-0">
-            <AnimatePresence mode="popLayout">
-              <motion.img
-                key={currentHero}
-                src={heroImages[currentHero]}
-                alt="School Campus"
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0, scale: 1.06 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: 'easeInOut' }}
-              />
-            </AnimatePresence>
-            {/* Gradient blending on larger screens */}
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent md:from-background/30 md:via-transparent" />
-          </div>
-
-          {/* Slideshow dots */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            {heroImages.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentHero(idx)}
-                className={`transition-all duration-300 rounded-full ${
-                  idx === currentHero ? 'w-6 h-2 bg-white' : 'w-2 h-2 bg-white/50 hover:bg-white/80'
-                }`}
-              />
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="container py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <AnimatedCounter end={20} suffix="+" label="Years of Excellence" />
-          <AnimatedCounter end={1500} suffix="+" label="Happy Students" />
-          <AnimatedCounter end={50} suffix="+" label="Expert Faculty" />
-          <AnimatedCounter end={95} suffix="%" label="Board Pass Rate" />
-        </div>
-      </section>
-
-      {/* About Preview — Magazine Style */}
-      <section className="py-20 md:py-32 bg-muted overflow-hidden">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            {/* Large image column */}
-            <motion.div
-              className="lg:col-span-7 relative"
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="rounded-3xl overflow-hidden h-[380px] md:h-[520px] relative shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1400"
-                  alt="Students at Vignan"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                {/* Text overlay on image */}
-                <div className="absolute bottom-0 left-0 p-8">
-                  <p className="text-white/60 text-sm font-bold uppercase tracking-widest mb-2">Est. 2004 · Laggere, Bengaluru</p>
-                  <h2 className="font-heading font-black text-white text-3xl md:text-4xl leading-tight">Where every child's <br/>potential is unlocked</h2>
-                </div>
-              </div>
+            {/* Text side */}
+            <motion.div variants={stagger} initial="initial" animate="animate">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-primary/8 border border-primary/15 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Est. 2004 · Bengaluru
+              </motion.div>
 
-              {/* Small floating second image */}
-              <motion.div
-                className="absolute -bottom-6 -right-6 w-40 h-40 rounded-2xl overflow-hidden shadow-xl border-4 border-background hidden md:block"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+              <motion.h1
+                variants={fadeUp}
+                className="font-heading font-black text-foreground leading-tight tracking-tight mb-5"
+                style={{ fontSize: 'clamp(2.4rem, 5vw, 4.5rem)' }}
               >
-                <img
-                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=400"
-                  alt="Classroom"
-                  className="w-full h-full object-cover"
-                />
+                Shaping{" "}<span className="text-primary">Tomorrow's</span>{" "}Leaders
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8 max-w-lg">
+                Two decades of nurturing curious minds. A community built on knowledge, values, and the belief that every child can shine.
+              </motion.p>
+
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-10">
+                <Link
+                  to="/admissions"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 group"
+                >
+                  Enrol Now <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-foreground/20 text-foreground font-semibold rounded-xl hover:border-primary hover:text-primary transition-all duration-300"
+                >
+                  Learn More
+                </Link>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div variants={fadeUp} className="flex items-center gap-8 pt-6 border-t border-primary/10">
+                {[{ n: '20+', l: 'Years' }, { n: '1500+', l: 'Students' }, { n: '95%', l: 'Pass Rate' }, { n: '50+', l: 'Faculty' }].map(s => (
+                  <div key={s.l}>
+                    <p className="text-lg font-black text-primary">{s.n}</p>
+                    <p className="text-xs text-muted-foreground">{s.l}</p>
+                  </div>
+                ))}
               </motion.div>
             </motion.div>
 
-            {/* Right content column */}
+            {/* Image side — contained, medium-sized */}
             <motion.div
-              className="lg:col-span-5 flex flex-col justify-between gap-6 lg:pl-6"
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
+              variants={fadeUp}
+              initial="initial"
+              animate="animate"
+              className="relative"
             >
-              <div>
-                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse inline-block" />
-                  About Vignan
+              {/* Decorative bg blob */}
+              <div className="absolute -top-6 -right-6 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-secondary/20 rounded-full blur-2xl pointer-events-none" />
+
+              {/* Image frame */}
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl shadow-primary/10 border border-primary/5">
+                <AnimatePresence mode="popLayout">
+                  <motion.img
+                    key={currentHero}
+                    src={heroImages[currentHero]}
+                    alt="School Campus"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.0, ease: 'easeInOut' }}
+                  />
+                </AnimatePresence>
+                {/* Light inner overlay for elegance */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent pointer-events-none" />
+
+                {/* Slideshow dots */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {heroImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentHero(idx)}
+                      className={`transition-all duration-300 rounded-full ${
+                        idx === currentHero ? 'w-5 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <h2 className="font-heading font-black text-foreground text-3xl md:text-4xl leading-tight mb-5">
-                  20 Years of <br/><span className="text-primary">Academic Excellence</span>
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  Vignan Public High School has been shaping confident, curious, and compassionate students since 2004. Our dedicated faculty, world-class facilities, and student-first culture create an environment where learning is a joy.
-                </p>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all duration-300 group"
-                >
-                  Discover our story <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                </Link>
               </div>
 
-              {/* 4 mini-stat cards */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* Small floating stat badge */}
+              <motion.div
+                className="absolute -bottom-4 -left-4 bg-background rounded-2xl px-4 py-3 shadow-lg border border-primary/10 hidden sm:block"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <p className="text-xs text-muted-foreground">Board Pass Rate</p>
+                <p className="text-2xl font-black text-primary">95%</p>
+              </motion.div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Stats bar — removed, now inline in hero */}
+
+      {/* About Preview */}
+      <section className="py-16 md:py-24 bg-muted">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl overflow-hidden aspect-[4/3] shadow-xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000"
+                alt="Students at Vignan"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                About Vignan
+              </div>
+              <h2 className="font-heading font-black text-foreground text-3xl md:text-4xl leading-tight mb-4">
+                20 Years of <span className="text-primary">Academic Excellence</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Vignan Public High School has been shaping confident, curious, and compassionate students since 2004. Our dedicated faculty, world-class facilities, and student-first culture create an environment where learning is a joy.
+              </p>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all duration-300 group mb-8"
+              >
+                Discover our story <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+              </Link>
+
+              {/* 2×2 stat grid */}
+              <div className="grid grid-cols-2 gap-3 mt-2">
                 {[
                   { icon: GraduationCap, value: 'LKG–10', label: 'Classes Offered' },
                   { icon: Users,         value: '50+',    label: 'Expert Teachers' },
@@ -246,24 +237,25 @@ const Index = () => {
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
-                    className="bg-background rounded-2xl p-5 flex items-start gap-3 shadow-sm border border-primary/5 hover:border-primary/20 transition-colors group"
-                    whileHover={{ y: -3 }}
-                    initial={{ opacity: 0, y: 15 }}
+                    className="bg-background rounded-xl p-4 flex items-center gap-3 border border-primary/5 hover:border-primary/20 transition-colors group"
+                    whileHover={{ y: -2 }}
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 + 0.3 }}
+                    transition={{ delay: i * 0.06 + 0.2 }}
                   >
-                    <div className="shrink-0 w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                      <item.icon size={18} className="text-primary group-hover:text-white transition-colors" />
+                    <div className="shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-all">
+                      <item.icon size={16} className="text-primary group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <p className="font-black text-foreground text-lg leading-none">{item.value}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{item.label}</p>
+                      <p className="font-black text-foreground">{item.value}</p>
+                      <p className="text-xs text-muted-foreground">{item.label}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
