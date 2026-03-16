@@ -88,8 +88,8 @@ const Index = () => {
               transition={{ duration: 1.5, ease: "easeInOut" }}
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-white/70 dark:bg-black/60 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-muted" />
+          <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-muted" />
         </motion.div>
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container py-20 md:py-32 relative">
           <motion.div className="max-w-3xl mx-auto text-center" variants={stagger} initial="initial" animate="animate">
@@ -232,40 +232,42 @@ const Index = () => {
             {facilities.map((cat, i) => (
               <motion.div
                 key={cat.category}
-                className="glass-card rounded-2xl p-8 group relative overflow-hidden"
+                className="bg-background rounded-2xl p-0 group relative overflow-hidden shadow-elegant border border-primary/5 flex flex-col"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.5 }}
                 whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } }}
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 group-hover:bg-primary/20 transition-all duration-700" />
-                <div className="mb-6 h-48 md:h-56 rounded-xl overflow-hidden relative shadow-lg">
+                <div className="h-56 w-full overflow-hidden relative">
                   <img 
                     src={i === 0 ? "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" : i === 1 ? "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=600" : "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600"} 
                     alt={cat.category} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
-                <h3 className="font-heading text-xl font-bold text-primary mb-4 relative">{cat.category}</h3>
-                <ul className="space-y-3 relative">
-                  {cat.items.map((item, j) => (
-                    <motion.li
-                      key={item.name}
-                      className="flex items-center gap-3 text-foreground/80 group/item"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.15 + j * 0.08 + 0.2 }}
-                    >
-                      <div className="p-1.5 rounded-md bg-primary/10 group-hover/item:bg-primary/20 transition-colors">
-                        <item.icon size={16} className="text-primary" />
-                      </div>
-                      <span className="font-body text-sm">{item.name}</span>
-                    </motion.li>
-                  ))}
-                </ul>
+                
+                <div className="p-8 flex-1 flex flex-col relative bg-background">
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6 -mt-14 relative z-10 shadow-sm border border-white">
+                    {i === 0 ? <FlaskConical size={24} /> : i === 1 ? <Code size={24} /> : <Heart size={24} />}
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-primary mb-4 relative">{cat.category}</h3>
+                  <ul className="space-y-4 relative">
+                    {cat.items.map((item, j) => (
+                      <motion.li
+                        key={item.name}
+                        className="flex items-center gap-3 text-foreground/80 group/item"
+                      >
+                        <div className="p-2 rounded-lg bg-primary/5 group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all">
+                          <item.icon size={16} />
+                        </div>
+                        <span className="font-body text-sm font-medium">{item.name}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -342,11 +344,11 @@ const Index = () => {
               >
                 <div className="h-44 w-full overflow-hidden relative">
                   <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute top-4 right-4 bg-background/95 backdrop-blur-sm pb-1 px-3 pt-2 rounded-lg text-center shadow-lg border border-primary/10">
-                    <p className="text-[10px] font-bold text-accent uppercase tracking-wider">{event.date.split(' ')[0]}</p>
-                    <p className="text-xl font-black text-primary leading-tight">{event.date.split(' ')[1].replace(',', '')}</p>
+                  <div className="absolute top-4 right-4 bg-primary text-primary-foreground pb-1 px-3 pt-2 rounded-lg text-center shadow-lg border-2 border-white/20 backdrop-blur-md">
+                    <p className="text-[10px] font-bold text-primary-foreground/90 uppercase tracking-widest">{event.date.split(' ')[0]}</p>
+                    <p className="text-2xl font-black text-white leading-tight">{event.date.split(' ')[1].replace(',', '')}</p>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col relative bg-background">
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -397,11 +399,40 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* Map */}
-      <section className="bg-muted py-16 md:py-24">
+      {/* Campus Gallery */}
+      <section className="py-16 md:py-24 bg-muted">
         <div className="container">
-          <motion.div className="text-center mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Find Us</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Campus Life Gallery</h2>
+            <p className="text-muted-foreground mx-auto max-w-lg">A glimpse into our vibrant educational environment</p>
+          </div>
+          <div className="flex overflow-x-auto gap-4 md:gap-6 pb-8 snap-x snap-mandatory scrollbar-hide px-4 md:px-0 -mx-4 md:mx-0">
+            {[
+              "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800",
+              "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
+              "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=800",
+              "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=800",
+              "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800",
+            ].map((src, idx) => (
+              <motion.div
+                key={idx}
+                className="min-w-[85vw] md:min-w-[400px] h-64 md:h-80 rounded-2xl overflow-hidden shadow-md snap-center relative group isolate"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img src={src} alt="Campus" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map */}
+      <section className="bg-background py-16 md:py-24 border-t border-primary/5">
+        <div className="container">
+          <motion.div className="text-center mb-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Visit Our Campus Location</h2>
             <div className="flex items-center justify-center gap-2 text-muted-foreground">
               <MapPin size={16} />
               <span className="text-sm">Laggere, Bengaluru, Karnataka</span>
