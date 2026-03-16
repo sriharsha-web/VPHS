@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import logo from "@/assets/logo.png";
+
 import AnimatedCounter from "@/components/AnimatedCounter";
 
 const fadeUp = {
@@ -79,10 +79,6 @@ const Index = () => {
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #7A0032 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
           <motion.div variants={stagger} initial="initial" animate="animate" className="relative">
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-              <img src={logo} alt="Logo" className="w-9 h-9 rounded-full shadow-md" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary/60">Vignan Public High School</span>
-            </motion.div>
 
             <motion.h1
               variants={fadeUp}
@@ -157,28 +153,7 @@ const Index = () => {
             ))}
           </div>
 
-          {/* Floating badge */}
-          <motion.div
-            className="absolute top-6 right-6 bg-background/90 backdrop-blur-md rounded-2xl px-4 py-3 shadow-xl border border-primary/10"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-          >
-            <p className="text-xs font-bold text-primary uppercase tracking-wider">Admissions 2025–26</p>
-            <p className="text-xs text-foreground/60 mt-0.5">Seats filling fast!</p>
-          </motion.div>
         </div>
-
-        {/* Scroll indicator — desktop only */}
-        <motion.div
-          className="absolute bottom-5 left-[25%] -translate-x-1/2 hidden md:flex flex-col items-center gap-1 z-20"
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="w-5 h-8 border-2 border-primary/25 rounded-full flex justify-center pt-1.5">
-            <div className="w-1 h-1.5 bg-primary/40 rounded-full" />
-          </div>
-        </motion.div>
       </section>
 
       {/* Stats */}
