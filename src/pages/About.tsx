@@ -55,8 +55,8 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="p-3 rounded-xl bg-primary/10 shrink-0 mt-1">
-                <section.icon size={24} className="text-primary" />
+              <div className="p-2 rounded-lg bg-primary/10 shrink-0 mt-1">
+                <section.icon size={20} className="text-primary" />
               </div>
               <div>
                 <h2 className="text-2xl font-heading font-bold text-primary mb-3">{section.title}</h2>
@@ -67,8 +67,8 @@ const About = () => {
 
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <Sparkles size={24} className="text-primary" />
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Sparkles size={20} className="text-primary" />
               </div>
               <h2 className="text-2xl font-heading font-bold text-primary">Our Values</h2>
             </div>
@@ -97,8 +97,8 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="p-3 rounded-xl bg-primary/10 shrink-0 mt-1">
-              <History size={24} className="text-primary" />
+            <div className="p-2 rounded-lg bg-primary/10 shrink-0 mt-1">
+              <History size={20} className="text-primary" />
             </div>
             <div>
               <h2 className="text-2xl font-heading font-bold text-primary mb-3">Our History</h2>

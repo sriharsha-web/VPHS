@@ -315,8 +315,8 @@ const Index = () => {
                 
                 <div className="p-8 flex-1 flex flex-col relative bg-background">
                   <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6 -mt-14 relative z-10 shadow-sm border border-white">
-                    {i === 0 ? <FlaskConical size={24} /> : i === 1 ? <Code size={24} /> : <Heart size={24} />}
+                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 text-primary mb-6 -mt-13 relative z-10 shadow-sm border border-white">
+                    {i === 0 ? <FlaskConical size={20} /> : i === 1 ? <Code size={20} /> : <Heart size={20} />}
                   </div>
                   <h3 className="font-heading text-xl font-bold text-primary mb-4 relative">{cat.category}</h3>
                   <ul className="space-y-4 relative">
