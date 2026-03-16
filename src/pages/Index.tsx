@@ -153,10 +153,10 @@ const Index = () => {
       </section>
 
       {/* About Preview */}
-      <section className="bg-muted py-16 md:py-24">
+      <section className="bg-[#FCFBF7] py-16 md:py-24 lg:py-32">
         <div className="container">
           <motion.div
-            className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -166,53 +166,34 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="text-center md:text-left flex flex-col items-center md:items-start"
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-6">About Our School</h2>
-              <p className="text-foreground/70 leading-relaxed text-pretty mb-4">
-                Vignan Public High School, located in Laggere, Bengaluru, has been a cornerstone of quality education for over two decades.
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-heading font-black text-[#1A1A1A] tracking-tight mb-8 leading-[1.1]">
+                Welcome to Vignan
+              </h2>
+              <p className="text-[#64748B] leading-relaxed text-lg mb-10 max-w-md">
+                Vignan Public High School prepares students into self-reliant, independent thinking, globally relevant, skilled and socially useful citizens of the nation embedded with values to contribute in their own mite to the society.
               </p>
-              <p className="text-foreground/70 leading-relaxed text-pretty mb-6">
-                We provide a nurturing environment where students develop academic excellence, moral values, and life skills.
-              </p>
-              <Link to="/about" className="inline-flex items-center gap-2 text-primary font-bold hover:text-accent transition-colors group mb-8 md:mb-0">
-                Read more about us <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <Link 
+                to="/admissions" 
+                className="inline-flex items-center justify-center font-bold px-10 py-4 bg-[#FF9F0A] text-white rounded-2xl hover:bg-[#F29000] transition-all duration-300 shadow-lg shadow-[#FF9F0A]/30 hover:shadow-[#FF9F0A]/50 hover:-translate-y-1 text-lg"
+              >
+                Register now
               </Link>
             </motion.div>
+            
             <motion.div
-              className="relative"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative w-full h-[350px] md:h-[400px]">
-                <div className="absolute inset-0 bg-primary/10 transform translate-x-4 translate-y-4 rounded-2xl" />
+              <div className="w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" 
-                  alt="Students studying" 
-                  className="relative rounded-2xl shadow-xl object-cover -rotate-2 hover:rotate-0 transition-transform duration-500 z-10 w-full h-full"
+                  src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=1200" 
+                  alt="Vignan Campus" 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
-              </div>
-              <div className="relative z-20 grid grid-cols-2 gap-4 md:gap-6 -mt-12 md:-mt-20 px-4 md:px-8">
-                {[
-                  { icon: GraduationCap, label: "K to Class 10" },
-                  { icon: Users, label: "Small Class Sizes" },
-                  { icon: Trophy, label: "Award Winning" },
-                  { icon: Clock, label: "20+ Years" },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    className="bg-background/90 backdrop-blur-md rounded-xl p-5 shadow-elegant text-center group cursor-default border border-primary/5"
-                    whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 + 0.3 }}
-                  >
-                    <item.icon size={26} className="mx-auto text-primary mb-2 group-hover:scale-110 group-hover:text-accent transition-all duration-300" />
-                    <p className="text-xs md:text-sm font-bold text-foreground/80">{item.label}</p>
-                  </motion.div>
-                ))}
               </div>
             </motion.div>
           </motion.div>
