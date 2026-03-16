@@ -80,8 +80,8 @@ const Index = () => {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            {/* Text side */}
-            <motion.div variants={stagger} initial="initial" animate="animate">
+            {/* Text side — below image on mobile */}
+            <motion.div variants={stagger} initial="initial" animate="animate" className="order-last md:order-none">
               {/* School name */}
               <motion.p
                 variants={fadeUp}
@@ -137,7 +137,7 @@ const Index = () => {
               variants={fadeUp}
               initial="initial"
               animate="animate"
-              className="relative"
+              className="relative order-first md:order-none"
             >
               {/* Decorative bg blob */}
               <div className="absolute -top-6 -right-6 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
