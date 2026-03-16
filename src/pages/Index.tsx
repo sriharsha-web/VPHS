@@ -78,21 +78,36 @@ const Index = () => {
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #7A0032 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
         <div className="container">
+          {/* Mobile Only: Title above the image */}
+          <motion.div variants={stagger} initial="initial" animate="animate" className="md:hidden pb-8 text-center sm:text-left">
+            <motion.p
+              variants={fadeUp}
+              className="font-heading font-bold text-primary tracking-wide text-2xl mb-1"
+            >
+              Vignan Public High School
+            </motion.p>
+            <motion.p variants={fadeUp} className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              Est. 2004 &bull; Laggere, Bengaluru
+            </motion.p>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
             {/* Text side — below image on mobile */}
             <motion.div variants={stagger} initial="initial" animate="animate" className="order-last md:order-none">
-              {/* School name */}
-              <motion.p
-                variants={fadeUp}
-                className="font-heading font-bold text-primary tracking-wide mb-1"
-                style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
-              >
-                Vignan Public High School
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6">
-                Est. 2004 &bull; Laggere, Bengaluru
-              </motion.p>
+              {/* School name (Desktop Only) */}
+              <div className="hidden md:block">
+                <motion.p
+                  variants={fadeUp}
+                  className="font-heading font-bold text-primary tracking-wide mb-1"
+                  style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
+                >
+                  Vignan Public High School
+                </motion.p>
+                <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6">
+                  Est. 2004 &bull; Laggere, Bengaluru
+                </motion.p>
+              </div>
 
               <motion.h1
                 variants={fadeUp}
