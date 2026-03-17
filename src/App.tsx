@@ -14,6 +14,7 @@ import Events from "./pages/Events";
 import Admissions from "./pages/Admissions";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -34,19 +35,27 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/academics" element={<Academics />} />
-            <Route path="/faculty" element={<Faculty />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/admissions" element={<Admissions />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Admin Route - No public layout */}
+          <Route path="/admin" element={<Admin />} />
+          
+          {/* Public Routes - With Layout */}
+          <Route path="/*" element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/academics" element={<Academics />} />
+                <Route path="/faculty" element={<Faculty />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/admissions" element={<Admissions />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
