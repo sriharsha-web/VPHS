@@ -28,7 +28,7 @@ const facilities = [
   },
   {
     category: "Geniusphere (Finance & Tech)",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800", // Trading/Tech feel
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800", // Tech & Network vibe for "Sphere"
     color: "from-primary/95", // Highlighted in primary color
     items: [
       { icon: TrendingUp, name: "Stock Market Simulation" },
