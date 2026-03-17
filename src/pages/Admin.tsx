@@ -2,15 +2,18 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Users, Image as ImageIcon, MessageSquare, FileText, 
-  Settings, LogOut, CheckCircle, Search, Plus, Trash2, Edit 
+  Settings, LogOut, Search, Plus, Trash2, Edit 
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useDataStore } from "@/store/dataStore";
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
+
+  const store = useDataStore();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,12 +92,11 @@ export default function Admin() {
     { id: "messages", label: "Enquiries", icon: MessageSquare },
     { id: "gallery", label: "Gallery", icon: ImageIcon },
     { id: "faculty", label: "Faculty", icon: Users },
-    { id: "testimonials", label: "Testimonials", icon: CheckCircle },
+    { id: "testimonials", label: "Testimonials", icon: MessageSquare },
   ];
 
   return (
     <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
-      {/* Sidebar */}
       <div className="w-full md:w-64 bg-card border-r border-primary/5 flex flex-col shadow-sm hidden md:flex sticky top-0 h-screen">
         <div className="p-6 border-b border-primary/5">
           <div className="flex items-center gap-3">
@@ -135,16 +137,11 @@ export default function Admin() {
         </div>
       </div>
 
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 bg-background overflow-hidden relative min-h-screen">
-        
-        {/* Mobile Header */}
         <div className="md:hidden flex items-center justify-between p-4 bg-card border-b border-primary/5 sticky top-0 z-50">
            <h2 className="font-heading font-bold text-lg">Admin / {tabs.find(t=>t.id===activeTab)?.label}</h2>
            <button onClick={handleLogout} className="p-2 bg-red-50 text-red-500 rounded-lg"><LogOut size={18}/></button>
         </div>
-
-        {/* Mobile Tabs */}
         <div className="md:hidden flex overflow-x-auto p-4 gap-2 bg-muted/50 border-b border-primary/5 hide-scrollbar sticky top-[60px] z-40 bg-background/95 backdrop-blur-md pb-2">
           {tabs.map(tab => (
              <button
@@ -161,43 +158,59 @@ export default function Admin() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}
             >
-              
               {activeTab === 'overview' && (
                 <div className="space-y-8">
                   <h1 className="text-3xl font-heading font-bold text-foreground">Dashboard Overview</h1>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <StatCard title="New Admissions" count="12" icon={FileText} trend="+2 this week" />
-                    <StatCard title="Unread Messages" count="34" icon={MessageSquare} trend="3 today" />
-                    <StatCard title="Gallery Photos" count="124" icon={ImageIcon} />
-                    <StatCard title="Active Faculty" count="48" icon={Users} />
+                    <StatCard title="Total Admissions" count={store.admissions.length} icon={FileText} />
+                    <StatCard title="Total Enquiries" count={store.enquiries.length} icon={MessageSquare} />
+                    <StatCard title="Gallery Photos" count={store.gallery.length} icon={ImageIcon} />
+                    <StatCard title="Active Faculty" count={store.faculty.length} icon={Users} />
                   </div>
                 </div>
               )}
 
               {activeTab === 'admissions' && (
                 <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h1 className="text-3xl font-heading font-bold text-foreground">Admission Applications</h1>
-                    <div className="flex bg-card border border-primary/10 rounded-xl px-4 py-2 w-full sm:w-80 focus-within:ring-2 focus-within:ring-primary/20">
-                      <Search className="text-muted-foreground mr-2" size={20} />
-                      <input type="text" placeholder="Search applications..." className="bg-transparent border-none outline-none w-full text-sm font-medium" />
-                    </div>
-                  </div>
-                  <div className="bg-card rounded-2xl border border-primary/10 shadow-sm overflow-hidden">
-                    <Table 
-                      headers={["Date", "Student Name", "Grade", "Parent Name", "Contact", "Status"]}
-                      rows={[
-                        ["Today", "Rahul Sharma", "Class 6", "Ramesh S", "9988776655", "Pending"],
-                        ["Yesterday", "Sneha P", "LKG", "Priya P", "8899001122", "Reviewed"],
-                        ["Mar 10", "Karthik R", "Class 9", "Rajesh R", "7766554433", "Pending"],
-                        ["Mar 08", "Ananya V", "UKG", "Vikram V", "9900887766", "Admitted"],
-                      ]}
-                    />
+                  <h1 className="text-3xl font-heading font-bold text-foreground">Admission Applications</h1>
+                  <div className="bg-card rounded-2xl border border-primary/10 shadow-sm overflow-hidden overflow-x-auto">
+                    <table className="w-full text-left text-sm whitespace-nowrap">
+                      <thead className="bg-primary/5 border-b border-primary/10">
+                        <tr>
+                          {["Date", "Student Name", "Grade", "Parent Name", "Contact", "Status", "Actions"].map(h => <th key={h} className="px-6 py-4 font-bold text-foreground/80">{h}</th>)}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-primary/5">
+                        {store.admissions.length === 0 && <tr><td colSpan={7} className="text-center py-6 text-muted-foreground">No applications found</td></tr>}
+                        {store.admissions.map(a => (
+                          <tr key={a.id} className="hover:bg-primary/[0.02]">
+                            <td className="px-6 py-4">{a.date}</td>
+                            <td className="px-6 py-4 font-medium">{a.studentName}</td>
+                            <td className="px-6 py-4">{a.grade}</td>
+                            <td className="px-6 py-4">{a.parentName}</td>
+                            <td className="px-6 py-4">{a.contact}</td>
+                            <td className="px-6 py-4">
+                              <select 
+                                value={a.status} 
+                                onChange={(e) => store.updateAdmissionStatus(a.id, e.target.value as any)}
+                                className={`px-2 py-1 rounded-md text-xs font-bold outline-none border-none
+                                  ${a.status === 'Pending' ? 'bg-orange-100 text-orange-700' : a.status === 'Reviewed' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'}
+                                `}
+                              >
+                                <option value="Pending">Pending</option>
+                                <option value="Reviewed">Reviewed</option>
+                                <option value="Admitted">Admitted</option>
+                              </select>
+                            </td>
+                            <td className="px-6 py-4">
+                              <button onClick={() => { if(confirm('Delete admission?')) store.deleteAdmission(a.id); }} className="text-red-500 hover:underline px-2 py-1 bg-red-50 rounded">Delete</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
@@ -206,23 +219,20 @@ export default function Admin() {
                 <div className="space-y-6">
                   <h1 className="text-3xl font-heading font-bold text-foreground">Contact Enquiries</h1>
                   <div className="grid gap-4">
-                    {[
-                      { name: "John Doe", email: "john@example.com", msg: "When do the admissions for LKG start? We recently moved to Laggere.", time: "2 hours ago" },
-                      { name: "Sita R", email: "sita@gmail.com", msg: "I wanted to inquire about the school bus routes for Chamundi Nagar.", time: "5 hours ago" },
-                      { name: "Vikas M", email: "vikas.m@yahoo.com", msg: "Can we visit the Geniusphere facility during weekend?", time: "1 day ago" },
-                    ].map((msg, i) => (
-                      <div key={i} className="bg-card rounded-2xl border border-primary/10 p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+                    {store.enquiries.length === 0 && <p className="text-muted-foreground">No enquiries found</p>}
+                    {store.enquiries.map((msg) => (
+                      <div key={msg.id} className={`bg-card rounded-2xl border border-primary/10 p-6 shadow-sm relative group overflow-hidden ${msg.read ? 'opacity-70' : ''}`}>
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-bold text-foreground">{msg.name}</h3>
                             <p className="text-xs text-muted-foreground">{msg.email}</p>
                           </div>
-                          <span className="text-xs font-semibold px-2 py-1 bg-primary/10 text-primary rounded-md">{msg.time}</span>
+                          <span className="text-xs font-semibold">{msg.date}</span>
                         </div>
-                        <p className="text-sm text-foreground/80 mt-3 p-4 bg-muted/50 rounded-xl">"{msg.msg}"</p>
+                        <p className="text-sm text-foreground/80 mt-3 p-4 bg-muted/50 rounded-xl">"{msg.message}"</p>
                         <div className="mt-4 flex gap-2">
-                          <button className="text-xs font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90">Reply via Email</button>
-                          <button className="text-xs font-bold text-muted-foreground bg-secondary px-4 py-2 rounded-lg hover:bg-secondary/80">Mark Read</button>
+                          {!msg.read && <button onClick={() => store.markEnquiryRead(msg.id)} className="text-xs font-bold text-white bg-primary px-4 py-2 rounded-lg hover:bg-primary/90">Mark Read</button>}
+                          <button onClick={() => { if(confirm('Delete enquiry?')) store.deleteEnquiry(msg.id); }} className="text-xs font-bold text-red-500 bg-red-50 px-4 py-2 rounded-lg hover:bg-red-100">Delete</button>
                         </div>
                       </div>
                     ))}
@@ -232,24 +242,31 @@ export default function Admin() {
 
               {activeTab === 'gallery' && (
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row gap-4">
                     <h1 className="text-3xl font-heading font-bold text-foreground">Manage Gallery</h1>
-                    <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:-translate-y-0.5 transition-all">
-                      <Plus size={16} /> Upload Photo
-                    </button>
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const fd = new FormData(e.currentTarget);
+                        store.addGalleryPhoto({ title: fd.get('title') as string, url: fd.get('url') as string });
+                        e.currentTarget.reset();
+                        toast({ title: 'Photo added' });
+                      }}
+                      className="flex gap-2 w-full sm:w-auto flex-wrap"
+                    >
+                      <input required name="title" type="text" placeholder="Title" className="border px-3 py-2 rounded-lg text-sm flex-1 sm:w-32" />
+                      <input required name="url" type="url" placeholder="Image URL" className="border px-3 py-2 rounded-lg text-sm flex-1 sm:w-48" />
+                      <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold flex gap-2 items-center"><Plus size={16}/> Add Photo</button>
+                    </form>
                   </div>
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    {[
-                       "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400",
-                       "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400",
-                       "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400",
-                       "https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=400",
-                       "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400"
-                    ].map((img, i) => (
-                      <div key={i} className="aspect-square bg-muted rounded-xl relative group overflow-hidden border border-primary/10 shadow-sm">
-                        <img src={img} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                    {store.gallery.length === 0 && <p className="text-muted-foreground col-span-2">No photos in gallery</p>}
+                    {store.gallery.map((img) => (
+                      <div key={img.id} className="aspect-square bg-muted rounded-xl relative group overflow-hidden border border-primary/10 shadow-sm">
+                        <img src={img.url} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <div className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">{img.title}</div>
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                           <button className="w-10 h-10 bg-white/20 hover:bg-red-500 rounded-full flex items-center justify-center text-white backdrop-blur-md transition-colors shadow-lg"><Trash2 size={16}/></button>
+                           <button onClick={() => { if(confirm('Delete photo?')) store.deleteGalleryPhoto(img.id); }} className="w-10 h-10 bg-white/20 hover:bg-red-500 rounded-full flex items-center justify-center text-white backdrop-blur-md transition-colors shadow-lg"><Trash2 size={16}/></button>
                         </div>
                       </div>
                     ))}
@@ -259,55 +276,94 @@ export default function Admin() {
 
               {activeTab === 'faculty' && (
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center flex-col sm:flex-row gap-4">
                     <h1 className="text-3xl font-heading font-bold text-foreground">Faculty Directory</h1>
-                    <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:-translate-y-0.5 transition-all">
-                      <Plus size={16} /> Add Faculty
-                    </button>
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const fd = new FormData(e.currentTarget);
+                        store.addFaculty({ 
+                          name: fd.get('name') as string, 
+                          department: fd.get('dept') as string,
+                          role: fd.get('role') as string,
+                          experience: fd.get('exp') as string 
+                        });
+                        e.currentTarget.reset();
+                        toast({ title: 'Faculty added' });
+                      }}
+                      className="flex gap-2 w-full sm:w-auto flex-wrap bg-card p-3 rounded-xl border"
+                    >
+                      <input required name="name" type="text" placeholder="Name" className="border px-2 py-1 rounded text-sm w-full sm:w-32" />
+                      <input required name="dept" type="text" placeholder="Department" className="border px-2 py-1 rounded text-sm w-full sm:w-32" />
+                      <input required name="role" type="text" placeholder="Role" className="border px-2 py-1 rounded text-sm w-full sm:w-24" />
+                      <input required name="exp" type="text" placeholder="Experience" className="border px-2 py-1 rounded text-sm w-full sm:w-24" />
+                      <button className="bg-primary text-white px-3 py-1 rounded text-sm font-bold w-full sm:w-auto"><Plus size={16} className="inline mr-1"/> Add</button>
+                    </form>
                   </div>
-                  <div className="bg-card rounded-2xl border border-primary/10 shadow-sm overflow-hidden">
-                    <Table 
-                      headers={["Name", "Department", "Role", "Experience", "Actions"]}
-                      rows={[
-                        ["Amar Narayan", "Administration", "Principal", "20+ Years", "edit"],
-                        ["Dr. Suresh K", "Sciences", "HOD Science", "15 Years", "edit"],
-                        ["Meera Reddy", "Mathematics", "Senior Teacher", "12 Years", "edit"],
-                        ["Priya S", "English", "Teacher", "8 Years", "edit"],
-                      ]}
-                    />
+                  <div className="bg-card rounded-2xl border border-primary/10 shadow-sm overflow-hidden overflow-x-auto">
+                    <table className="w-full text-left text-sm whitespace-nowrap">
+                      <thead className="bg-primary/5 border-b border-primary/10">
+                        <tr>
+                          {["Name", "Department", "Role", "Experience", "Actions"].map(h => <th key={h} className="px-6 py-4 font-bold text-foreground/80">{h}</th>)}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-primary/5">
+                        {store.faculty.length === 0 && <tr><td colSpan={5} className="text-center py-6 text-muted-foreground">No faculty members found</td></tr>}
+                        {store.faculty.map(f => (
+                          <tr key={f.id} className="hover:bg-primary/[0.02]">
+                            <td className="px-6 py-4 font-medium">{f.name}</td>
+                            <td className="px-6 py-4">{f.department}</td>
+                            <td className="px-6 py-4">{f.role}</td>
+                            <td className="px-6 py-4">{f.experience}</td>
+                            <td className="px-6 py-4">
+                              <button onClick={() => { if(confirm('Delete faculty?')) store.deleteFaculty(f.id); }} className="text-red-500 hover:underline px-2 py-1 bg-red-50 rounded">Delete</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
 
               {activeTab === 'testimonials' && (
                 <div className="space-y-6">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center flex-col sm:flex-row gap-4">
                     <h1 className="text-3xl font-heading font-bold text-foreground">Testimonials</h1>
-                    <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-xl font-bold text-sm shadow-md hover:-translate-y-0.5 transition-all">
-                      <Plus size={16} /> Add New
-                    </button>
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const fd = new FormData(e.currentTarget);
+                        store.addTestimonial({ 
+                          name: fd.get('name') as string, 
+                          role: fd.get('role') as string,
+                          text: fd.get('text') as string 
+                        });
+                        e.currentTarget.reset();
+                        toast({ title: 'Testimonial added' });
+                      }}
+                      className="flex gap-2 w-full sm:w-auto flex-wrap bg-card p-3 rounded-xl border flex-col sm:flex-row"
+                    >
+                      <input required name="name" type="text" placeholder="Parent Name" className="border px-3 py-2 rounded-lg text-sm w-full sm:w-auto" />
+                      <input required name="role" type="text" placeholder="Role (e.g. Class 5 Parent)" className="border px-3 py-2 rounded-lg text-sm w-full sm:w-auto" />
+                      <textarea required name="text" placeholder="Testimonial text..." className="border px-3 py-2 rounded-lg text-sm w-full sm:w-64 resize-none h-10" />
+                      <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold w-full sm:w-auto h-10"><Plus size={16} className="inline mr-1"/> Add</button>
+                    </form>
                   </div>
                   <div className="bg-card rounded-2xl border border-primary/10 shadow-sm overflow-hidden p-6 divide-y divide-primary/5">
-                    {[
-                       { n: "Suresh P.", r: "Parent (Class 8)", t: "The Geniusphere program has transformed how my son looks at math." },
-                       { n: "Kavitha M.", r: "Parent (Class 5)", t: "Vignan provides a perfectly balanced curriculum." },
-                       { n: "Rahul S.", r: "Alumnus", t: "My years at Vignan gave me the foundation I needed." }
-                    ].map((item, i) => (
-                      <div key={i} className="py-4 first:pt-0 last:pb-0 flex justify-between items-center group">
+                    {store.testimonials.length === 0 && <p className="text-muted-foreground text-center">No testimonials added</p>}
+                    {store.testimonials.map((item) => (
+                      <div key={item.id} className="py-4 first:pt-0 last:pb-0 flex justify-between items-center group gap-4">
                         <div>
-                          <p className="font-bold text-foreground">{item.n} <span className="font-normal text-xs text-muted-foreground ml-2">({item.r})</span></p>
-                          <p className="text-sm text-foreground/80 mt-1 italic">"{item.t}"</p>
+                          <p className="font-bold text-foreground">{item.name} <span className="font-normal text-xs text-muted-foreground ml-2">({item.role})</span></p>
+                          <p className="text-sm text-foreground/80 mt-1 italic">"{item.text}"</p>
                         </div>
-                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button className="p-2 bg-secondary rounded-lg text-secondary-foreground hover:bg-primary/20 hover:text-primary"><Edit size={16}/></button>
-                          <button className="p-2 bg-red-50 rounded-lg text-red-500 hover:bg-red-500 hover:text-white"><Trash2 size={16}/></button>
-                        </div>
+                        <button onClick={() => { if(confirm('Delete testimonial?')) store.deleteTestimonial(item.id); }} className="p-2 shrink-0 bg-red-50 rounded-lg text-red-500 hover:bg-red-500 hover:text-white transition-colors"><Trash2 size={16}/></button>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
-
             </motion.div>
           </AnimatePresence>
         </main>
@@ -316,7 +372,6 @@ export default function Admin() {
   );
 }
 
-// Helper Components
 function StatCard({ title, count, icon: Icon, trend }: any) {
   return (
     <div className="bg-card p-6 rounded-2xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
@@ -331,44 +386,6 @@ function StatCard({ title, count, icon: Icon, trend }: any) {
         <p className="text-3xl font-heading font-black text-foreground mb-1">{count}</p>
         <p className="text-sm font-medium text-muted-foreground">{title}</p>
       </div>
-    </div>
-  );
-}
-
-function Table({ headers, rows }: { headers: string[], rows: any[][] }) {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left text-sm whitespace-nowrap">
-        <thead className="bg-primary/5 border-b border-primary/10">
-          <tr>
-            {headers.map((h, i) => <th key={i} className="px-6 py-4 font-bold text-foreground/80">{h}</th>)}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-primary/5">
-          {rows.map((row, i) => (
-            <tr key={i} className="hover:bg-primary/[0.02] transition-colors">
-              {row.map((cell, j) => (
-                <td key={j} className="px-6 py-4 text-foreground/80 font-medium">
-                  {cell === "edit" ? (
-                     <div className="flex gap-2">
-                       <button className="text-primary hover:underline px-2 py-1 bg-primary/10 rounded">Edit</button>
-                       <button className="text-red-500 hover:underline px-2 py-1 bg-red-50 rounded">Del</button>
-                     </div>
-                  ) : cell === "Pending" ? (
-                    <span className="px-2.5 py-1 bg-orange-100 text-orange-700 rounded-md text-xs font-bold">Pending</span>
-                  ) : cell === "Admitted" ? (
-                    <span className="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-md text-xs font-bold">Admitted</span>
-                  ) : cell === "Reviewed" ? (
-                    <span className="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-md text-xs font-bold">Reviewed</span>
-                  ) : (
-                    cell
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }

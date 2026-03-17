@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText, CheckCircle, ClipboardList, Phone, GraduationCap } from "lucide-react";
+import { useDataStore } from "@/store/dataStore";
+import { toast } from "@/hooks/use-toast";
 
 const process = [
   "Visit the school or contact us for an application form",
@@ -27,6 +30,24 @@ const eligibility = [
 ];
 
 const Admissions = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const store = useDataStore();
+
+  const handleApply = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    store.addAdmission({
+      studentName: fd.get('studentName') as string,
+      grade: fd.get('grade') as string,
+      parentName: fd.get('parentName') as string,
+      contact: fd.get('contact') as string,
+    });
+    setSubmitted(true);
+    toast({ title: 'Application Submitted', description: 'We will contact you shortly.' });
+    e.currentTarget.reset();
+    setTimeout(() => setSubmitted(false), 5000);
+  };
+
   return (
     <div>
       <section className="bg-muted pt-28 md:pt-36 pb-16 md:pb-20 relative overflow-hidden">
@@ -147,40 +168,40 @@ const Admissions = () => {
              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
              <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
              
-            <form className="space-y-6 relative z-10" onSubmit={(e) => { e.preventDefault(); alert('Application submitted successfully!'); }}>
+            <form className="space-y-6 relative z-10" onSubmit={handleApply}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground/80">Student's Name</label>
-                  <input required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Rahul Sharma" />
+                  <input name="studentName" required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Rahul Sharma" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground/80">Grade Applied For</label>
-                  <select required className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm text-foreground/90">
+                  <select name="grade" required className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm text-foreground/90">
                     <option value="" disabled selected>Select Grade</option>
                     <option value="LKG">LKG</option>
                     <option value="UKG">UKG</option>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>Class {n}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={`Class ${n}`}>Class {n}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground/80">Parent's Name</label>
-                  <input required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Ramesh Sharma" />
+                  <input name="parentName" required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Ramesh Sharma" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground/80">Contact Number</label>
-                  <input required type="tel" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="+91" />
+                  <input name="contact" required type="tel" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="+91" />
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-sm font-semibold text-foreground/80">Prior School (if any)</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="Previous school name" />
+                  <input name="priorSchool" type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="Previous school name" />
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-sm font-semibold text-foreground/80">Additional Notes / Queries</label>
-                  <textarea rows={3} className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm resize-none" placeholder="Any special requirements or questions..."></textarea>
+                  <textarea name="notes" rows={3} className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm resize-none" placeholder="Any special requirements or questions..."></textarea>
                 </div>
               </div>
-              <button type="submit" className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group">
-                Submit Application <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <button type="submit" disabled={submitted} className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed">
+                {submitted ? "Submitted Successfully!" : "Submit Application"} <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
           </div>

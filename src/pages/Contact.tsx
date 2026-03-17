@@ -2,14 +2,23 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { useDataStore } from "@/store/dataStore";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState<string | null>(null);
 
+  const store = useDataStore();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    store.addEnquiry({
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      message: form.message
+    });
     setSubmitted(true);
     toast({ title: "Message sent!", description: "We'll get back to you soon." });
     setTimeout(() => {

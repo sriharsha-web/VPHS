@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, FlaskConical, Code, Calculator, Heart, Swords, MapPin, GraduationCap, Users, Trophy, Clock, Calendar, TrendingUp, ChevronDown } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import { useDataStore } from "@/store/dataStore";
 
 import AnimatedCounter from "@/components/AnimatedCounter";
 
@@ -73,6 +74,7 @@ const heroImages = [
 const Index = () => {
   const [currentHero, setCurrentHero] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const store = useDataStore();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -460,38 +462,32 @@ const Index = () => {
           <p className="text-muted-foreground max-w-lg mx-auto">Hear from our community of parents and students.</p>
         </div>
         
-        {/* Row 1 — scrolls left */}
-        <div className="overflow-hidden mb-6 relative">
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" style={{ position: 'absolute' }} />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" style={{ position: 'absolute' }} />
-          
-          <div className="marquee-track gap-6 flex">
-            {[
-              { name: "Suresh P.", role: "Parent (Class 8)", text: "The Geniusphere program has transformed how my son looks at math and finance. Highly recommended!" },
-              { name: "Kavitha M.", role: "Parent (Class 5)", text: "Vignan provides a perfectly balanced curriculum. The faculty is very approachable and caring." },
-              { name: "Rahul S.", role: "Alumnus", text: "My years at Vignan gave me the foundation I needed for my engineering career." },
-              { name: "Anitha R.", role: "Parent (Class 10)", text: "Excellent infrastructure, especially the science labs. We are very happy with the board exam coaching." },
-              { name: "David T.", role: "Parent (LKG)", text: "A very safe and nurturing environment for toddlers. The teachers are fantastic." },
-              // duplicated for smooth scrolling
-              { name: "Suresh P.", role: "Parent (Class 8)", text: "The Geniusphere program has transformed how my son looks at math and finance. Highly recommended!" },
-              { name: "Kavitha M.", role: "Parent (Class 5)", text: "Vignan provides a perfectly balanced curriculum. The faculty is very approachable and caring." },
-              { name: "Rahul S.", role: "Alumnus", text: "My years at Vignan gave me the foundation I needed for my engineering career." },
-              { name: "Anitha R.", role: "Parent (Class 10)", text: "Excellent infrastructure, especially the science labs. We are very happy with the board exam coaching." },
-              { name: "David T.", role: "Parent (LKG)", text: "A very safe and nurturing environment for toddlers. The teachers are fantastic." },
-            ].map((review, idx) => (
-              <div key={idx} className="shrink-0 w-72 md:w-96 bg-card rounded-2xl p-6 shadow-elegant border border-primary/5 flex flex-col justify-between">
-                 <p className="text-sm md:text-base text-foreground/80 leading-relaxed italic mb-4">"{review.text}"</p>
-                 <div className="flex items-center gap-3">
-                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">{review.name.charAt(0)}</div>
-                   <div>
-                     <p className="font-heading font-bold text-foreground text-sm">{review.name}</p>
-                     <p className="text-xs text-muted-foreground">{review.role}</p>
-                   </div>
-                 </div>
-              </div>
-            ))}
+        {store.testimonials.length === 0 ? (
+          <div className="text-center py-10 container">
+             <p className="text-muted-foreground bg-primary/5 py-4 rounded-xl border border-primary/10">No testimonials yet.</p>
           </div>
-        </div>
+        ) : (
+          <div className="overflow-hidden mb-6 relative">
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
+            
+            <div className="marquee-track gap-6 flex">
+              {/* Duplicate array for smooth scrolling */}
+              {[...store.testimonials, ...store.testimonials, ...store.testimonials].map((review, idx) => (
+                <div key={idx} className="shrink-0 w-72 md:w-96 bg-card rounded-2xl p-6 shadow-elegant border border-primary/5 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                   <p className="text-sm md:text-base text-foreground/80 leading-relaxed italic mb-4">"{review.text}"</p>
+                   <div className="flex items-center gap-3 mt-auto pt-4 border-t border-primary/5">
+                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">{review.name.charAt(0)}</div>
+                     <div>
+                       <p className="font-heading font-bold text-foreground text-sm">{review.name}</p>
+                       <p className="text-xs text-muted-foreground">{review.role}</p>
+                     </div>
+                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Admissions CTA */}
