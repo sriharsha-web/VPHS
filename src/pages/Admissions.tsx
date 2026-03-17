@@ -134,6 +134,58 @@ const Admissions = () => {
           </div>
         </div>
 
+        {/* Admission Form Section */}
+        <div>
+          <motion.div className="flex items-center gap-3 mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            <div className="p-2.5 rounded-xl bg-primary/10">
+              <FileText size={20} className="text-primary" />
+            </div>
+            <h2 className="text-2xl font-heading font-bold text-primary">Apply Online</h2>
+          </motion.div>
+          <div className="bg-card rounded-2xl p-6 md:p-8 shadow-elegant border border-primary/5 relative overflow-hidden">
+             {/* Decorative Background Accent */}
+             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
+             <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
+             
+            <form className="space-y-6 relative z-10" onSubmit={(e) => { e.preventDefault(); alert('Application submitted successfully!'); }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground/80">Student's Name</label>
+                  <input required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Rahul Sharma" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground/80">Grade Applied For</label>
+                  <select required className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm text-foreground/90">
+                    <option value="" disabled selected>Select Grade</option>
+                    <option value="LKG">LKG</option>
+                    <option value="UKG">UKG</option>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>Class {n}</option>)}
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground/80">Parent's Name</label>
+                  <input required type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="e.g. Ramesh Sharma" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground/80">Contact Number</label>
+                  <input required type="tel" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="+91" />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-sm font-semibold text-foreground/80">Prior School (if any)</label>
+                  <input type="text" className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm" placeholder="Previous school name" />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-sm font-semibold text-foreground/80">Additional Notes / Queries</label>
+                  <textarea rows={3} className="w-full px-4 py-3 rounded-xl border border-primary/10 bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body text-sm resize-none" placeholder="Any special requirements or questions..."></textarea>
+                </div>
+              </div>
+              <button type="submit" className="w-full md:w-auto px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group">
+                Submit Application <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
+          </div>
+        </div>
+
         {/* Contact CTA */}
         <motion.div
           className="bg-primary rounded-2xl p-8 md:p-10 text-center relative overflow-hidden"
@@ -149,7 +201,7 @@ const Admissions = () => {
           <div className="relative">
             <div className="flex items-center justify-center gap-2 mb-3">
               <Phone size={18} className="text-primary-foreground" />
-              <h2 className="text-xl font-heading font-bold text-primary-foreground">Ready to Enroll?</h2>
+              <h2 className="text-xl font-heading font-bold text-primary-foreground">Have Questions?</h2>
             </div>
             <p className="text-primary-foreground/70 text-sm mb-6">
               Contact us at <a href="tel:+919972235286" className="underline font-medium">99722 35286</a> or visit our school.

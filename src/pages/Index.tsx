@@ -17,7 +17,9 @@ const stagger = {
 
 const facilities = [
   {
-    category: "Academic Facilities",
+    category: "Academic Excellence",
+    image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800",
+    color: "from-blue-900/90",
     items: [
       { icon: FlaskConical, name: "Science Lab" },
       { icon: Calculator, name: "Mathematics Lab" },
@@ -25,18 +27,33 @@ const facilities = [
     ],
   },
   {
-    category: "Skill Development",
+    category: "Geniusphere (Finance & Tech)",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800", // Trading/Tech feel
+    color: "from-primary/95", // Highlighted in primary color
     items: [
-      { icon: TrendingUp, name: "Geniusphere" },
+      { icon: TrendingUp, name: "Stock Market Simulation" },
+      { icon: Calculator, name: "Financial Literacy" },
+      { icon: Code, name: "Coding & Entrepreneurship" },
+    ],
+  },
+  {
+    category: "Skill Development",
+    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=800",
+    color: "from-purple-900/90",
+    items: [
       { icon: Code, name: "Code Club" },
       { icon: Calculator, name: "Abacus" },
+      { icon: GraduationCap, name: "Leadership" },
     ],
   },
   {
     category: "Physical & Wellness",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    color: "from-emerald-900/90",
     items: [
       { icon: Heart, name: "Yoga" },
       { icon: Swords, name: "Karate" },
+      { icon: Trophy, name: "Athletics" },
     ],
   },
 ];
@@ -285,53 +302,56 @@ const Index = () => {
       </section>
 
       {/* Facilities */}
-      <section className="py-16 md:py-24">
-        <div className="container">
+      <section className="py-16 md:py-24 bg-muted">
+        <div className="container overflow-visible">
           <motion.div className="text-center mb-12"
             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Our Facilities</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">World-class infrastructure to support holistic learning</p>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Our Premium Facilities</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">World-class infrastructure designed to foster holistic learning and future-ready skills.</p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
             {facilities.map((cat, i) => (
               <motion.div
                 key={cat.category}
-                className="bg-background rounded-2xl p-0 group relative overflow-hidden shadow-elegant border border-primary/5 flex flex-col"
+                className={`relative group rounded-3xl overflow-hidden shadow-elegant border-[0.5px] border-white/20 h-[450px] flex flex-col justify-end isolation-auto`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.5 }}
-                whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } }}
+                whileHover={{ y: -10, scale: 1.02, transition: { duration: 0.3, ease: "easeOut" } }}
               >
-                <div className="h-56 w-full overflow-hidden relative">
-                  <img 
-                    src={i === 0 ? "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600" : i === 1 ? "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=600" : "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600"} 
-                    alt={cat.category} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* Background Image filling the card */}
+                <div className="absolute inset-0 w-full h-full z-0">
+                  <img src={cat.image} alt={cat.category} className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700 ease-in-out" />
                 </div>
                 
-                <div className="p-8 flex-1 flex flex-col relative bg-background">
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 text-primary mb-6 -mt-13 relative z-10 shadow-sm border border-white">
-                    {i === 0 ? <FlaskConical size={20} /> : i === 1 ? <Code size={20} /> : <Heart size={20} />}
+                {/* Dark filled overlay gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${cat.color} via-black/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500 z-10`} />
+                
+                {/* Content on top */}
+                <div className="relative z-20 p-8 pt-20 flex flex-col justify-end h-full transform transition-transform duration-300">
+                  <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white border border-white/30 shadow-lg">
+                    {i === 1 ? <TrendingUp size={24} /> : i === 0 ? <FlaskConical size={24} /> : i === 2 ? <Code size={24} /> : <Heart size={24} />}
                   </div>
-                  <h3 className="font-heading text-xl font-bold text-primary mb-4 relative">{cat.category}</h3>
-                  <ul className="space-y-4 relative">
-                    {cat.items.map((item, j) => (
-                      <motion.li
-                        key={item.name}
-                        className="flex items-center gap-3 text-foreground/80 group/item"
-                      >
-                        <div className="p-2 rounded-lg bg-primary/5 group-hover/item:bg-primary/10 group-hover/item:text-primary transition-all">
-                          <item.icon size={16} />
-                        </div>
-                        <span className="font-body text-sm font-medium">{item.name}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                  <h3 className="font-heading text-2xl font-bold text-white mb-2 leading-tight">{cat.category}</h3>
+                  
+                  <div className="overflow-hidden mt-2">
+                    <ul className="space-y-3 relative text-white/90">
+                      {cat.items.map((item, j) => (
+                        <motion.li
+                          key={item.name}
+                          className="flex items-center gap-3 font-medium text-sm group/item"
+                        >
+                          <div className="p-1.5 rounded-full bg-white/10 group-hover/item:bg-white group-hover/item:text-black transition-colors">
+                            <item.icon size={14} />
+                          </div>
+                          <span className="font-body opacity-90 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all">{item.name}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -427,9 +447,50 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
-          <Link to="/events" className="sm:hidden mt-6 inline-flex items-center gap-1 text-accent font-medium text-sm hover:underline">
+      <Link to="/events" className="sm:hidden mt-6 inline-flex items-center gap-1 text-accent font-medium text-sm hover:underline">
             View all events <ArrowRight size={14} />
           </Link>
+        </div>
+      </section>
+      
+      {/* Testimonials Marquee Section */}
+      <section className="py-16 md:py-24 bg-primary/5 overflow-hidden border-y border-primary/10">
+        <div className="text-center mb-10 container">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">What Parents Say</h2>
+          <p className="text-muted-foreground max-w-lg mx-auto">Hear from our community of parents and students.</p>
+        </div>
+        
+        {/* Row 1 — scrolls left */}
+        <div className="overflow-hidden mb-6 relative">
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" style={{ position: 'absolute' }} />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" style={{ position: 'absolute' }} />
+          
+          <div className="marquee-track gap-6 flex">
+            {[
+              { name: "Suresh P.", role: "Parent (Class 8)", text: "The Geniusphere program has transformed how my son looks at math and finance. Highly recommended!" },
+              { name: "Kavitha M.", role: "Parent (Class 5)", text: "Vignan provides a perfectly balanced curriculum. The faculty is very approachable and caring." },
+              { name: "Rahul S.", role: "Alumnus", text: "My years at Vignan gave me the foundation I needed for my engineering career." },
+              { name: "Anitha R.", role: "Parent (Class 10)", text: "Excellent infrastructure, especially the science labs. We are very happy with the board exam coaching." },
+              { name: "David T.", role: "Parent (LKG)", text: "A very safe and nurturing environment for toddlers. The teachers are fantastic." },
+              // duplicated for smooth scrolling
+              { name: "Suresh P.", role: "Parent (Class 8)", text: "The Geniusphere program has transformed how my son looks at math and finance. Highly recommended!" },
+              { name: "Kavitha M.", role: "Parent (Class 5)", text: "Vignan provides a perfectly balanced curriculum. The faculty is very approachable and caring." },
+              { name: "Rahul S.", role: "Alumnus", text: "My years at Vignan gave me the foundation I needed for my engineering career." },
+              { name: "Anitha R.", role: "Parent (Class 10)", text: "Excellent infrastructure, especially the science labs. We are very happy with the board exam coaching." },
+              { name: "David T.", role: "Parent (LKG)", text: "A very safe and nurturing environment for toddlers. The teachers are fantastic." },
+            ].map((review, idx) => (
+              <div key={idx} className="shrink-0 w-72 md:w-96 bg-card rounded-2xl p-6 shadow-elegant border border-primary/5 flex flex-col justify-between">
+                 <p className="text-sm md:text-base text-foreground/80 leading-relaxed italic mb-4">"{review.text}"</p>
+                 <div className="flex items-center gap-3">
+                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary">{review.name.charAt(0)}</div>
+                   <div>
+                     <p className="font-heading font-bold text-foreground text-sm">{review.name}</p>
+                     <p className="text-xs text-muted-foreground">{review.role}</p>
+                   </div>
+                 </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
