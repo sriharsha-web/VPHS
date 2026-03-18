@@ -71,6 +71,29 @@ const heroImages = [
   "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=2000",
 ];
 
+const toppers = [
+  { name: "Lohith .L", score: "98%" },
+  { name: "Kiran .S", score: "97%" },
+  { name: "Ramya .K", score: "97%" },
+  { name: "Namratha .Y", score: "96%" },
+  { name: "Bhanuprakash .B", score: "96%" },
+  { name: "Yashodha .N", score: "96%" },
+  { name: "Jitendra .R", score: "95%" },
+  { name: "Deepthi .N", score: "95%" },
+  { name: "Rakesh .S", score: "95%" },
+  { name: "M. Bharath", score: "91%" },
+  { name: "Madan .H.K", score: "88%" },
+  { name: "Thanushree .N", score: "87%" },
+  { name: "Vidya .R", score: "87%" },
+  { name: "Manasa .D", score: "86%" },
+  { name: "Sandeep .H", score: "84%" },
+  { name: "Deepa .R", score: "81%" },
+  { name: "Abhishek .H", score: "78%" },
+  { name: "Akash .K.N", score: "77%" },
+  { name: "Maruthi .K.L", score: "76%" },
+  { name: "Harika .N", score: "72%" }
+];
+
 const Index = () => {
   const [currentHero, setCurrentHero] = useState(0);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
@@ -403,6 +426,55 @@ const Index = () => {
               </div>
             </motion.div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* School Toppers Section */}
+      <section className="py-16 md:py-24 bg-background border-t border-primary/5">
+        <div className="container">
+          <motion.div className="text-center mb-12"
+            initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-5">
+              <Trophy size={14} className="text-yellow-600" />
+              Our School Toppers
+            </div>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary tracking-tight mb-3">Hearty Congratulations To SSLC Toppers 2024 - 2025</h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">We are immensely proud of our bright students for their outstanding performance in the board exams.</p>
+          </motion.div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            {toppers.map((topper, i) => (
+              <motion.div
+                key={topper.name}
+                className={`relative group rounded-2xl overflow-hidden shadow-elegant border-[0.5px] border-primary/10 bg-card flex flex-col`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 5) * 0.1, duration: 0.4 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                {/* Top: Photo/Initials */}
+                <div className="aspect-square w-full bg-secondary/20 flex flex-col items-center justify-center p-4">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-white flex items-center justify-center relative shadow-lg border-4 border-white mb-3">
+                    <img 
+                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${topper.name.replace(/\./g, '')}&backgroundColor=7A0032,1e192d,001a4d,004d1a,4d3a00&textColor=ffffff`}
+                      alt={topper.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm sm:text-base leading-tight mb-1 truncate w-full text-center px-2">{topper.name}</h3>
+                </div>
+                
+                {/* Bottom: Score */}
+                <div className="p-3 bg-primary/5 border-t border-primary/10 text-center flex-1 flex items-center justify-center">
+                  <div className="inline-flex items-center justify-center gap-1">
+                    <span className="text-2xl sm:text-3xl font-black text-primary drop-shadow-sm">{topper.score}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
