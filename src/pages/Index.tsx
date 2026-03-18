@@ -72,26 +72,26 @@ const heroImages = [
 ];
 
 const toppers = [
-  { name: "Lohith .L", score: "98%" },
-  { name: "Kiran .S", score: "97%" },
-  { name: "Ramya .K", score: "97%" },
-  { name: "Namratha .Y", score: "96%" },
-  { name: "Bhanuprakash .B", score: "96%" },
-  { name: "Yashodha .N", score: "96%" },
-  { name: "Jitendra .R", score: "95%" },
-  { name: "Deepthi .N", score: "95%" },
-  { name: "Rakesh .S", score: "95%" },
-  { name: "M. Bharath", score: "91%" },
-  { name: "Madan .H.K", score: "88%" },
-  { name: "Thanushree .N", score: "87%" },
-  { name: "Vidya .R", score: "87%" },
-  { name: "Manasa .D", score: "86%" },
-  { name: "Sandeep .H", score: "84%" },
-  { name: "Deepa .R", score: "81%" },
-  { name: "Abhishek .H", score: "78%" },
-  { name: "Akash .K.N", score: "77%" },
-  { name: "Maruthi .K.L", score: "76%" },
-  { name: "Harika .N", score: "72%" }
+  { name: "Lohith .L", score: "98%", image: "/assets/toppers/lohith.jpg" },
+  { name: "Kiran .S", score: "97%", image: "/assets/toppers/kiran.jpg" },
+  { name: "Ramya .K", score: "97%", image: "/assets/toppers/ramya.jpg" },
+  { name: "Namratha .Y", score: "96%", image: "/assets/toppers/namratha.jpg" },
+  { name: "Bhanuprakash .B", score: "96%", image: "/assets/toppers/bhanuprakash.jpg" },
+  { name: "Yashodha .N", score: "96%", image: "/assets/toppers/yashodha.jpg" },
+  { name: "Jitendra .R", score: "95%", image: "/assets/toppers/jitendra.jpg" },
+  { name: "Deepthi .N", score: "95%", image: "/assets/toppers/deepthi.jpg" },
+  { name: "Rakesh .S", score: "95%", image: "/assets/toppers/rakesh.jpg" },
+  { name: "M. Bharath", score: "91%", image: "/assets/toppers/bharath.jpg" },
+  { name: "Madan .H.K", score: "88%", image: "/assets/toppers/madan.jpg" },
+  { name: "Thanushree .N", score: "87%", image: "/assets/toppers/thanushree.jpg" },
+  { name: "Vidya .R", score: "87%", image: "/assets/toppers/vidya.jpg" },
+  { name: "Manasa .D", score: "86%", image: "/assets/toppers/manasa.jpg" },
+  { name: "Sandeep .H", score: "84%", image: "/assets/toppers/sandeep.jpg" },
+  { name: "Deepa .R", score: "81%", image: "/assets/toppers/deepa.jpg" },
+  { name: "Abhishek .H", score: "78%", image: "/assets/toppers/abhishek.jpg" },
+  { name: "Akash .K.N", score: "77%", image: "/assets/toppers/akash.jpg" },
+  { name: "Maruthi .K.L", score: "76%", image: "/assets/toppers/maruthi.jpg" },
+  { name: "Harika .N", score: "72%", image: "/assets/toppers/harika.jpg" }
 ];
 
 const Index = () => {
@@ -443,37 +443,41 @@ const Index = () => {
             <p className="text-muted-foreground max-w-lg mx-auto">We are immensely proud of our bright students for their outstanding performance in the board exams.</p>
           </motion.div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-            {toppers.map((topper, i) => (
-              <motion.div
-                key={topper.name}
-                className={`relative group rounded-2xl overflow-hidden shadow-elegant border-[0.5px] border-primary/10 bg-card flex flex-col`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: (i % 5) * 0.1, duration: 0.4 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                {/* Top: Photo/Initials */}
-                <div className="aspect-square w-full bg-secondary/20 flex flex-col items-center justify-center p-4">
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-white flex items-center justify-center relative shadow-lg border-4 border-white mb-3">
-                    <img 
-                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${topper.name.replace(/\./g, '')}&backgroundColor=7A0032,1e192d,001a4d,004d1a,4d3a00&textColor=ffffff`}
-                      alt={topper.name}
-                      className="w-full h-full object-cover"
-                    />
+          <div className="overflow-hidden relative flex py-4">
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
+            
+            <div className="marquee-track gap-4 md:gap-6 flex">
+              {[...toppers, ...toppers, ...toppers].map((topper, idx) => (
+                <div
+                  key={`${topper.name}-${idx}`}
+                  className="shrink-0 w-48 sm:w-56 relative group rounded-2xl overflow-hidden shadow-elegant border-[0.5px] border-primary/10 bg-card flex flex-col hover:-translate-y-2 transition-transform duration-300"
+                >
+                  {/* Top: Photo/Initials */}
+                  <div className="aspect-square w-full bg-secondary/20 flex flex-col items-center justify-center p-4">
+                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-white flex items-center justify-center relative shadow-lg border-4 border-white mb-3">
+                      <img 
+                        src={topper.image}
+                        alt={topper.name}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null; // Prevent infinite loops
+                          e.currentTarget.src = `https://api.dicebear.com/7.x/initials/svg?seed=${topper.name.replace(/\./g, '')}&backgroundColor=7A0032,1e192d,001a4d,004d1a,4d3a00&textColor=ffffff`;
+                        }}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <h3 className="font-heading font-bold text-foreground text-sm sm:text-base leading-tight mb-1 truncate w-full text-center px-2">{topper.name}</h3>
                   </div>
-                  <h3 className="font-heading font-bold text-foreground text-sm sm:text-base leading-tight mb-1 truncate w-full text-center px-2">{topper.name}</h3>
-                </div>
-                
-                {/* Bottom: Score */}
-                <div className="p-3 bg-primary/5 border-t border-primary/10 text-center flex-1 flex items-center justify-center">
-                  <div className="inline-flex items-center justify-center gap-1">
-                    <span className="text-2xl sm:text-3xl font-black text-primary drop-shadow-sm">{topper.score}</span>
+                  
+                  {/* Bottom: Score */}
+                  <div className="p-3 bg-primary/5 border-t border-primary/10 text-center flex-1 flex items-center justify-center">
+                    <div className="inline-flex items-center justify-center gap-1">
+                      <span className="text-2xl sm:text-3xl font-black text-primary drop-shadow-sm">{topper.score}</span>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
