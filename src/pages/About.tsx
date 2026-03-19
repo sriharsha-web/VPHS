@@ -73,7 +73,7 @@ const About = () => {
         <div className="absolute top-40 right-10 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-20 left-10 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative z-10">
           {[
             {
               icon: Eye,
@@ -85,21 +85,26 @@ const About = () => {
               title: "Our Mission",
               text: "To provide a safe, inclusive, and stimulating learning environment that fosters academic excellence, character development, and holistic growth. We are committed to helping every student discover their unique potential.",
             },
+            {
+              icon: History,
+              title: "Our History",
+              text: "Since our founding, Vignan Public High School has grown from a small institution to a well-respected school serving hundreds of students from Kindergarten through Class 10 with an unwavering commitment to educational excellence over two successful decades.",
+            },
           ].map((section, i) => (
             <motion.div
               key={section.title}
-              className="relative bg-card rounded-[2rem] p-8 md:p-10 border border-primary/10 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group"
+              className="relative bg-card rounded-[2rem] p-8 lg:p-10 border border-primary/10 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-inner">
                 <section.icon size={28} className="text-primary" />
               </div>
-              <h2 className="text-3xl font-heading font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{section.title}</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">{section.text}</p>
+              <h2 className="text-2xl lg:text-3xl font-heading font-black text-foreground mb-4 group-hover:text-primary transition-colors">{section.title}</h2>
+              <p className="text-muted-foreground leading-relaxed text-base lg:text-lg">{section.text}</p>
             </motion.div>
           ))}
         </div>
@@ -131,27 +136,6 @@ const About = () => {
             ))}
           </div>
         </div>
-
-        <motion.div
-          className="mt-16 md:mt-24 relative bg-card rounded-[2.5rem] p-10 md:p-16 border border-primary/10 shadow-xl overflow-hidden group"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 group-hover:bg-primary/20 transition-colors" />
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start">
-            <div className="w-20 h-20 shrink-0 rounded-3xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-              <History size={40} className="text-primary" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Our History</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                Since our founding, Vignan Public High School has grown from a small institution to a well-respected school serving hundreds of students from Kindergarten through Class 10. Our alumni have gone on to achieve success in various fields, a testament to the strong foundation we provide and our unwavering commitment to educational excellence over two successful decades.
-              </p>
-            </div>
-          </div>
-        </motion.div>
 
       </section>
     </div>
