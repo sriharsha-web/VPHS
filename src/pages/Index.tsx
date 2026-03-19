@@ -66,14 +66,26 @@ const events = [
 ];
 
 const toppers = [
-  { name: "Aditi S", score: "620/625", percentage: "99.2%", image: "https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&q=80&w=300" },
-  { name: "Rahul M", score: "618/625", percentage: "98.8%", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300" },
-  { name: "Sneha P", score: "615/625", percentage: "98.4%", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=300" },
-  { name: "Karthik R", score: "610/625", percentage: "97.6%", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300" },
-  { name: "Pooja V", score: "608/625", percentage: "97.2%", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" },
-  { name: "Akhil K", score: "605/625", percentage: "96.8%", image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=300" },
-  { name: "Nidhi B", score: "602/625", percentage: "96.3%", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" },
-  { name: "Varun K", score: "600/625", percentage: "96.0%", image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=300" },
+  { name: "Lohith .L", percentage: "98%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Lohith+L&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Kiran .S", percentage: "97%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Kiran+S&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Ramya .K", percentage: "97%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Ramya+K&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Namratha .Y", percentage: "96%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Namratha+Y&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Bhanuprakash .B", percentage: "96%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Bhanuprakash+B&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Yashodha .N", percentage: "96%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Yashodha+N&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Jitendra .R", percentage: "95%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Jitendra+R&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Deepthi .N", percentage: "95%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Deepthi+N&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Rakesh .S", percentage: "95%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Rakesh+S&backgroundColor=eab308&textColor=ffffff" },
+  { name: "M. Bharath", percentage: "91%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=M+Bharath&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Madan .H.K", percentage: "88%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Madan+HK&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Thanushree .N", percentage: "87%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Thanushree+N&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Vidya .R", percentage: "87%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Vidya+R&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Manasa .D", percentage: "86%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Manasa+D&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Sandeep .H", percentage: "84%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Sandeep+H&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Deepa .R", percentage: "81%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Deepa+R&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Abhishek .H", percentage: "78%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Abhishek+H&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Akash .K.N", percentage: "77%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Akash+KN&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Maruthi .K.L", percentage: "76%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Maruthi+KL&backgroundColor=eab308&textColor=ffffff" },
+  { name: "Harika .N", percentage: "72%", score: "SSLC", image: "https://api.dicebear.com/7.x/initials/svg?seed=Harika+N&backgroundColor=eab308&textColor=ffffff" },
 ];
 
 const heroImages = [
