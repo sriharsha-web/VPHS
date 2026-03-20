@@ -144,49 +144,49 @@ export const useDataStore = create<DataStore>()(
 
       gallery: [
         // Geniusphere Photos
-        { id: crypto.randomUUID(), title: "Code Club Launch", url: "/gallery/Geniusphere/🚀 Code Club by Raspberry Pi is officially launched at Vignan Public High School!A new space wh.webp", folderId: "folder-1" },
-        { id: crypto.randomUUID(), title: "English Communication Session 1", url: "/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t.jpg", folderId: "folder-1" },
-        { id: crypto.randomUUID(), title: "English Communication Session 2", url: "/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t.heic", folderId: "folder-1" },
-        { id: crypto.randomUUID(), title: "English Communication Session 3", url: "/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t (1).heic", folderId: "folder-1" },
+        { id: crypto.randomUUID(), title: "Code Club Launch", url: encodeURI("/gallery/Geniusphere/🚀 Code Club by Raspberry Pi is officially launched at Vignan Public High School!A new space wh.webp"), folderId: "folder-1" },
+        { id: crypto.randomUUID(), title: "English Communication Session 1", url: encodeURI("/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t.jpg"), folderId: "folder-1" },
+        { id: crypto.randomUUID(), title: "English Communication Session 2", url: encodeURI("/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t.heic"), folderId: "folder-1" },
+        { id: crypto.randomUUID(), title: "English Communication Session 3", url: encodeURI("/gallery/Geniusphere/🚀 Exciting Announcement! 🏫 Geniusphere is bringing an amazing English communication session t (1).heic"), folderId: "folder-1" },
         
         // Christmas Photos
-        { id: crypto.randomUUID(), title: "Christmas Celebration 1", url: "/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.03 AM.jpeg", folderId: "folder-2" },
-        { id: crypto.randomUUID(), title: "Christmas Celebration 2", url: "/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.05 AM (3).jpeg", folderId: "folder-2" },
-        { id: crypto.randomUUID(), title: "Christmas Celebration 3", url: "/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.08 AM (1).jpeg", folderId: "folder-2" },
+        { id: crypto.randomUUID(), title: "Christmas Celebration 1", url: encodeURI("/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.03 AM.jpeg"), folderId: "folder-2" },
+        { id: crypto.randomUUID(), title: "Christmas Celebration 2", url: encodeURI("/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.05 AM (3).jpeg"), folderId: "folder-2" },
+        { id: crypto.randomUUID(), title: "Christmas Celebration 3", url: encodeURI("/gallery/christmas/WhatsApp Image 2026-03-14 at 9.51.08 AM (1).jpeg"), folderId: "folder-2" },
         
         // Independence Day Photos
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 1", url: "/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan .jpg", folderId: "folder-3" },
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 2", url: "/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan.heic", folderId: "folder-3" },
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 3", url: "/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan (1).heic", folderId: "folder-3" },
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 4", url: "/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.47 AM.jpeg", folderId: "folder-3" },
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 5", url: "/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.48 AM.jpeg", folderId: "folder-3" },
-        { id: crypto.randomUUID(), title: "Independence Day Celebration 6", url: "/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.54 AM (1).jpeg", folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 1", url: encodeURI("/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan .jpg"), folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 2", url: encodeURI("/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan.heic"), folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 3", url: encodeURI("/gallery/independence day/From conducting Geniusphere sessions to being invited as a guest for Independence Day at Vignan (1).heic"), folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 4", url: encodeURI("/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.47 AM.jpeg"), folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 5", url: encodeURI("/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.48 AM.jpeg"), folderId: "folder-3" },
+        { id: crypto.randomUUID(), title: "Independence Day Celebration 6", url: encodeURI("/gallery/independence day/WhatsApp Image 2026-03-14 at 9.50.54 AM (1).jpeg"), folderId: "folder-3" },
         
         // Sankranti Photos
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 1", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.48 AM (1).jpeg", folderId: "folder-4" },
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 2", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.48 AM (2).jpeg", folderId: "folder-4" },
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 3", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.54 AM.jpeg", folderId: "folder-4" },
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 4", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.57 AM.jpeg", folderId: "folder-4" },
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 5", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.51.03 AM (2).jpeg", folderId: "folder-4" },
-        { id: crypto.randomUUID(), title: "Sankranti Celebration 6", url: "/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.51.12 AM (1).jpeg", folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 1", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.48 AM (1).jpeg"), folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 2", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.48 AM (2).jpeg"), folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 3", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.54 AM.jpeg"), folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 4", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.50.57 AM.jpeg"), folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 5", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.51.03 AM (2).jpeg"), folderId: "folder-4" },
+        { id: crypto.randomUUID(), title: "Sankranti Celebration 6", url: encodeURI("/gallery/sankrathi celebaration/WhatsApp Image 2026-03-14 at 9.51.12 AM (1).jpeg"), folderId: "folder-4" },
         
         // Trip Photos
-        { id: crypto.randomUUID(), title: "School Trip 1", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM.jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 2", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM (1).jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 3", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM (3).jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 4", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.05 AM.jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 5", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.05 AM (1).jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 6", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.06 AM (1).jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 7", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.06 AM (2).jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 8", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.07 AM.jpeg", folderId: "folder-5" },
-        { id: crypto.randomUUID(), title: "School Trip 9", url: "/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.07 AM (1).jpeg", folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 1", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM.jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 2", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM (1).jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 3", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.04 AM (3).jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 4", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.05 AM.jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 5", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.05 AM (1).jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 6", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.06 AM (1).jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 7", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.06 AM (2).jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 8", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.07 AM.jpeg"), folderId: "folder-5" },
+        { id: crypto.randomUUID(), title: "School Trip 9", url: encodeURI("/gallery/trip/WhatsApp Image 2026-03-14 at 9.51.07 AM (1).jpeg"), folderId: "folder-5" },
         
         // Science Exhibition Photos
-        { id: crypto.randomUUID(), title: "Science Exhibition 1", url: "/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM.jpeg", folderId: "folder-6" },
-        { id: crypto.randomUUID(), title: "Science Exhibition 2", url: "/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM (1).jpeg", folderId: "folder-6" },
-        { id: crypto.randomUUID(), title: "Science Exhibition 3", url: "/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM (2).jpeg", folderId: "folder-6" },
-        { id: crypto.randomUUID(), title: "Science Exhibition 4", url: "/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.53 AM (2).jpeg", folderId: "folder-6" },
-        { id: crypto.randomUUID(), title: "Science Exhibition 5", url: "/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.57 AM (3).jpeg", folderId: "folder-6" }
+        { id: crypto.randomUUID(), title: "Science Exhibition 1", url: encodeURI("/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM.jpeg"), folderId: "folder-6" },
+        { id: crypto.randomUUID(), title: "Science Exhibition 2", url: encodeURI("/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM (1).jpeg"), folderId: "folder-6" },
+        { id: crypto.randomUUID(), title: "Science Exhibition 3", url: encodeURI("/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.49 AM (2).jpeg"), folderId: "folder-6" },
+        { id: crypto.randomUUID(), title: "Science Exhibition 4", url: encodeURI("/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.53 AM (2).jpeg"), folderId: "folder-6" },
+        { id: crypto.randomUUID(), title: "Science Exhibition 5", url: encodeURI("/gallery/science exhibiton/WhatsApp Image 2026-03-14 at 9.50.57 AM (3).jpeg"), folderId: "folder-6" }
       ],
       addGalleryPhoto: (photo) => set((state) => ({
         gallery: [{ ...photo, id: crypto.randomUUID() }, ...state.gallery]
