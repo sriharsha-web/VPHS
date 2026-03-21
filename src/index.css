@@ -123,12 +123,12 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-ltr 30s linear infinite;
+  animation: marquee-ltr 60s linear infinite;
 }
 .marquee-track-rtl {
   display: flex;
   width: max-content;
-  animation: marquee-rtl 35s linear infinite;
+  animation: marquee-rtl 70s linear infinite;
 }
 .marquee-track:hover,
 .marquee-track-rtl:hover {
