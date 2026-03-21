@@ -661,25 +661,19 @@ const Index = () => {
         {/* Row 1 — scrolls left */}
         <div className="overflow-hidden mb-3 relative">
           <div className="marquee-track gap-3">
-            {[
-              { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=700", label: "Campus" },
-              { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=700", label: "Classroom" },
-              { src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=700", label: "Science Lab" },
-              { src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=700", label: "Study Hall" },
-              { src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=700", label: "Tech" },
-              { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=700", label: "School Grounds" },
-              // duplicated for seamless loop
-              { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=700", label: "Campus" },
-              { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=700", label: "Classroom" },
-              { src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=700", label: "Science Lab" },
-              { src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=700", label: "Study Hall" },
-              { src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=700", label: "Tech" },
-              { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=700", label: "School Grounds" },
-            ].map((photo, idx) => (
-              <div key={idx} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
-                <img src={photo.src} alt={photo.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            {[...store.gallery, ...store.gallery].map((photo, idx) => (
+              <div key={`${photo.id}-${idx}`} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
+                {photo.url.toLowerCase().endsWith('.mp4') ? (
+                  <video 
+                    src={photo.url} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    autoPlay muted loop playsInline
+                  />
+                ) : (
+                  <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.label}</span>
+                <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.title}</span>
               </div>
             ))}
           </div>
@@ -688,25 +682,19 @@ const Index = () => {
         {/* Row 2 — scrolls right */}
         <div className="overflow-hidden relative">
           <div className="marquee-track-rtl gap-3">
-            {[
-              { src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=700", label: "Sports Day" },
-              { src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=700", label: "Annual Day" },
-              { src: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=700", label: "Computer Lab" },
-              { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=700", label: "Students" },
-              { src: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=700", label: "Library" },
-              { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=700", label: "Workshop" },
-              // duplicated
-              { src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=700", label: "Sports Day" },
-              { src: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=700", label: "Annual Day" },
-              { src: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=700", label: "Computer Lab" },
-              { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=700", label: "Students" },
-              { src: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=700", label: "Library" },
-              { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=700", label: "Workshop" },
-            ].map((photo, idx) => (
-              <div key={idx} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
-                <img src={photo.src} alt={photo.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            {[...store.gallery.slice().reverse(), ...store.gallery.slice().reverse()].map((photo, idx) => (
+              <div key={`${photo.id}-rev-${idx}`} className="shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden relative group shadow-sm border border-primary/5">
+                {photo.url.toLowerCase().endsWith('.mp4') ? (
+                  <video 
+                    src={photo.url} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    autoPlay muted loop playsInline
+                  />
+                ) : (
+                  <img src={photo.url} alt={photo.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.label}</span>
+                <span className="absolute bottom-2 left-3 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">{photo.title}</span>
               </div>
             ))}
           </div>
